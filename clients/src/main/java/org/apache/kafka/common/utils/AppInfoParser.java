@@ -20,9 +20,9 @@ import java.io.InputStream;
 import java.lang.management.ManagementFactory;
 import java.util.Properties;
 
-import javax.management.JMException;
-import javax.management.MBeanServer;
-import javax.management.ObjectName;
+//import javax.management.JMException;
+//import javax.management.MBeanServer;
+//import javax.management.ObjectName;
 
 import org.apache.kafka.common.MetricName;
 import org.apache.kafka.common.metrics.Gauge;
@@ -56,28 +56,28 @@ public class AppInfoParser {
     }
 
     public static synchronized void registerAppInfo(String prefix, String id, Metrics metrics) {
-        try {
-            ObjectName name = new ObjectName(prefix + ":type=app-info,id=" + Sanitizer.jmxSanitize(id));
-            AppInfo mBean = new AppInfo();
-            ManagementFactory.getPlatformMBeanServer().registerMBean(mBean, name);
-
-            registerMetrics(metrics); // prefix will be added later by JmxReporter
-        } catch (JMException e) {
-            log.warn("Error registering AppInfo mbean", e);
-        }
+//        try {
+//            ObjectName name = new ObjectName(prefix + ":type=app-info,id=" + Sanitizer.jmxSanitize(id));
+//            AppInfo mBean = new AppInfo();
+//            ManagementFactory.getPlatformMBeanServer().registerMBean(mBean, name);
+//
+//            registerMetrics(metrics); // prefix will be added later by JmxReporter
+//        } catch (JMException e) {
+//            log.warn("Error registering AppInfo mbean", e);
+//        }
     }
 
     public static synchronized void unregisterAppInfo(String prefix, String id, Metrics metrics) {
-        MBeanServer server = ManagementFactory.getPlatformMBeanServer();
-        try {
-            ObjectName name = new ObjectName(prefix + ":type=app-info,id=" + Sanitizer.jmxSanitize(id));
-            if (server.isRegistered(name))
-                server.unregisterMBean(name);
-
-            unregisterMetrics(metrics);
-        } catch (JMException e) {
-            log.warn("Error unregistering AppInfo mbean", e);
-        }
+//        MBeanServer server = ManagementFactory.getPlatformMBeanServer();
+//        try {
+//            ObjectName name = new ObjectName(prefix + ":type=app-info,id=" + Sanitizer.jmxSanitize(id));
+//            if (server.isRegistered(name))
+//                server.unregisterMBean(name);
+//
+//            unregisterMetrics(metrics);
+//        } catch (JMException e) {
+//            log.warn("Error unregistering AppInfo mbean", e);
+//        }
     }
 
     private static MetricName metricName(Metrics metrics, String name) {
